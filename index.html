@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programming Quiz</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="quiz-header">
+            <div class="logo-area">
+                <span class="code-icon">&lt;/&gt;</span>
+                <h1>Programming <span>Quiz</span></h1>
+            </div>
+            <p class="tagline">Test Your Knowledge &nbsp;•&nbsp; Improve Your Skills &nbsp;•&nbsp; Become a Better Developer</p>
+        </header>
+
+        <!-- VIEW 1: Subject Selection Cards -->
+        <section id="subject-view" class="view active">
+            <div class="section-title">
+                <span class="icon">🎯</span>
+                <h2>Choose Your Quiz</h2>
+            </div>
+            <div class="cards-grid">
+                <!-- Java Card -->
+                <div class="subject-card java-theme" onclick="selectSubject('Java')">
+                    <div class="card-icon">☕</div>
+                    <h3>Java</h3>
+                    <p>Core Java, syntax, classes, methods, inheritance, collections and more...</p>
+                    <div class="card-footer">
+                        <button class="start-btn-box">Start Quiz ▶</button>
+                    </div>
+                </div>
+
+                <!-- DSA Card -->
+                <div class="subject-card dsa-theme" onclick="selectSubject('DSA')">
+                    <div class="card-icon">🔀</div>
+                    <h3>DSA</h3>
+                    <p>Arrays, Linked List, Stack, Queue, Tree, Graph, Searching & Sorting...</p>
+                    <div class="card-footer">
+                        <button class="start-btn-box">Start Quiz ▶</button>
+                    </div>
+                </div>
+
+                <!-- OOPs Card -->
+                <div class="subject-card oops-theme" onclick="selectSubject('OOPs')">
+                    <div class="card-icon">&lt;/&gt;</div>
+                    <h3>OOPs</h3>
+                    <p>Classes, Objects, Inheritance, Polymorphism, Encapsulation, Abstraction...</p>
+                    <div class="card-footer">
+                        <button class="start-btn-box">Start Quiz ▶</button>
+                    </div>
+                </div>
+
+                <!-- MySQL Card -->
+                <div class="subject-card mysql-theme" onclick="selectSubject('MySQL')">
+                    <div class="card-icon">🗄️</div>
+                    <h3>MySQL</h3>
+                    <p>Relational databases, SQL queries, Joins, Indexing, Triggers, Procedures...</p>
+                    <div class="card-footer">
+                        <button class="start-btn-box">Start Quiz ▶</button>
+                    </div>
+                </div>
+
+                <!-- HTML Card -->
+                <div class="subject-card html-theme" onclick="selectSubject('HTML')">
+                    <div class="card-icon">🌐</div>
+                    <h3>HTML</h3>
+                    <p>Markup fundamentals, Semantic elements, Forms, Tables, SEO basics...</p>
+                    <div class="card-footer">
+                        <button class="start-btn-box">Start Quiz ▶</button>
+                    </div>
+                </div>
+
+                <!-- JavaScript Card -->
+                <div class="subject-card js-theme" onclick="selectSubject('JavaScript')">
+                    <div class="card-icon">⚡</div>
+                    <h3>JavaScript</h3>
+                    <p>ES6+, DOM manipulation, Asynchronous JS, Closures, Event handling...</p>
+                    <div class="card-footer">
+                        <button class="start-btn-box">Start Quiz ▶</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 2: Difficulty Level Cards -->
+        <section id="difficulty-view" class="view">
+            <div class="back-bar">
+                <button class="back-nav-btn" onclick="goBackToSubjects()">⬅ Back to Subjects</button>
+            </div>
+            <div class="section-title">
+                <span class="icon">📊</span>
+                <h2>Select Difficulty Level</h2>
+            </div>
+            <div class="diff-grid">
+                <!-- Easy Card -->
+                <div class="diff-card easy-card" onclick="startQuiz('Easy')">
+                    <div class="diff-icon">🍃</div>
+                    <h3>Easy</h3>
+                    <p>Basic concepts and fundamentals for beginners.</p>
+                </div>
+
+                <!-- Medium Card -->
+                <div class="diff-card medium-card" onclick="startQuiz('Medium')">
+                    <div class="diff-icon">⚙️</div>
+                    <h3>Medium</h3>
+                    <p>Moderate level questions to test your logic.</p>
+                </div>
+
+                <!-- Hard Card -->
+                <div class="diff-card hard-card" onclick="startQuiz('Hard')">
+                    <div class="diff-icon">🔥</div>
+                    <h3>Hard</h3>
+                    <p>Advanced questions for real challenge & mastery.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 3: Quiz Gameplay View -->
+        <section id="quiz-view" class="view">
+            <div class="quiz-top-bar">
+                <span id="quiz-subject-badge" class="badge-tag">Java • Medium</span>
+                <span id="question-counter" class="counter-tag">1/5</span>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-bar-container">
+                <div id="progress-fill" class="progress-fill"></div>
+            </div>
+
+            <!-- Question Card Box -->
+            <div class="question-card">
+                <h3 id="question-title">Q1. Loading question...</h3>
+                <div id="code-snippet-box" class="code-box hidden">
+                    <pre><code id="code-text"></code></pre>
+                </div>
+                
+                <div id="options-container" class="options-list">
+                    <!-- Dynamic Options -->
+                </div>
+            </div>
+
+            <!-- Quiz Navigation Bottom -->
+            <div class="quiz-nav-row">
+                <button id="prev-btn" class="nav-btn secondary" onclick="prevQuestion()">Previous</button>
+                <button id="next-btn" class="nav-btn primary" onclick="nextQuestion()">Next ▶</button>
+            </div>
+        </section>
+
+        <!-- VIEW 4: Completion & Score Summary -->
+        <section id="result-view" class="view">
+            <div class="result-card">
+                <div class="success-icon-wrap">
+                    <span class="check-icon">✓</span>
+                </div>
+                <h2>Quiz Completed!</h2>
+                <p>You have successfully completed the quiz session.</p>
+
+                <div class="score-stats-box">
+                    <div class="stat-row">
+                        <span>Total Questions</span>
+                        <strong id="res-total">5</strong>
+                    </div>
+                    <div class="stat-row">
+                        <span>Correct Answers</span>
+                        <strong id="res-correct" class="text-green">4</strong>
+                    </div>
+                    <div class="stat-row">
+                        <span>Wrong Answers</span>
+                        <strong id="res-wrong" class="text-red">1</strong>
+                    </div>
+                    <div class="stat-row highlight">
+                        <span>Your Score</span>
+                        <strong id="res-percentage">80%</strong>
+                    </div>
+                </div>
+
+                <div class="result-actions">
+                    <button class="action-btn blue" onclick="goBackToSubjects()">Back to Subjects</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="Script.js"></script>
+</body>
+</html>
